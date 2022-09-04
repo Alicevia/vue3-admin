@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header title="deafult-header"></Header>
+    <Header title="settings-header"></Header>
     <router-view></router-view>
-    <Footer title="deafult-footer"></Footer>
+    <Footer title="settings-footer"></Footer>
   </div>
 </template>
 

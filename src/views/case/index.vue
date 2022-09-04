@@ -1,5 +1,5 @@
 <template>
-  <div>index-main</div>
+  <div>case</div>
 </template>
 
 <script setup lang="ts"></script>
