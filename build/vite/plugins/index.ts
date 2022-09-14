@@ -1,3 +1,4 @@
+import type { ImportMetaEnv } from './../../../types/configuration.d'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Pages from 'vite-plugin-pages'
@@ -6,21 +7,27 @@ import autoImportComponents from './autoImportComponents'
 import Layouts from 'vite-plugin-vue-layouts'
 import VueSetUpExtend from 'vite-plugin-vue-setup-extend'
 import Inspector from 'vite-plugin-vue-inspector'
-const plugins = [
-  vue(),
-  vueJsx(),
-  Inspector({
-    enabled: true
-  }),
-  VueSetUpExtend(),
-  Pages({
-    dirs: 'src/views',
-    exclude: ['**/components/*.vue']
-  }),
-  Layouts({
-    layoutsDirs: 'src/layouts'
-  }),
-  autoImportApi(),
-  autoImportComponents()
-]
-export { plugins }
+
+export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) => {
+  const { VITE_USE_LEGACY } = projectSettings
+  const plugins = [
+    vue(),
+    vueJsx(),
+    Pages({
+      dirs: 'src/views',
+      exclude: ['**/components/*.vue']
+    }),
+    Layouts({
+      layoutsDirs: 'src/layouts'
+    }),
+    VueSetUpExtend(),
+    autoImportApi(),
+    autoImportComponents()
+  ]
+  if (!isBuild) {
+    plugins.push(Inspector({
+      enabled: true
+    }))
+  }
+  return plugins
+}
