@@ -1,7 +1,7 @@
-import type { ImportMetaEnv } from '../../types/configuration'
+import type { ImportMetaEnv, ProjectEnv } from '../../types/configuration'
 
-export const analyseEnv = (VITE_ENV:ImportMetaEnv):ImportMetaEnv => {
-  const settings:Partial<ImportMetaEnv> = {}
+export const analyseEnv = (VITE_ENV:ImportMetaEnv):ProjectEnv => {
+  const settings:ProjectEnv = {}
   for (const key in VITE_ENV) {
     if (key.includes('USE')) {
       settings[key] = JSON.parse(VITE_ENV[key])

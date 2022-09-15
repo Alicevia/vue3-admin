@@ -7,6 +7,7 @@ import autoImportComponents from './autoImportComponents'
 import Layouts from 'vite-plugin-vue-layouts'
 import VueSetUpExtend from 'vite-plugin-vue-setup-extend'
 import Inspector from 'vite-plugin-vue-inspector'
+import legacy from '@vitejs/plugin-legacy'
 
 export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) => {
   const { VITE_USE_LEGACY } = projectSettings
@@ -29,5 +30,11 @@ export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) 
       enabled: true
     }))
   }
+
+  VITE_USE_LEGACY && plugins.push(legacy({
+    // 设置目标浏览器，browserslist 配置语法
+    targets: '>0.5%',
+    modernPolyfills: true
+  }))
   return plugins
 }

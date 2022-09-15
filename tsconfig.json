@@ -8,6 +8,9 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "lib": [
+      "ES2022"
+    ],
     "paths": {
       "@/*": [
         "./src/*"

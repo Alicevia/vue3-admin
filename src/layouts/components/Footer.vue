@@ -9,6 +9,7 @@ defineProps({
     default: 'footer'
   }
 })
+// asd;f
 </script>
 <style scoped>
 </style>

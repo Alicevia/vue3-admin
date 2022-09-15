@@ -1,16 +1,13 @@
-// export type ImportMetaEnv ={
-//   VITE_BASE?:string
-//   VITE_USE_MOCK?:boolean
-//   VITE_USE_LEGACY?: boolean
-//   VITE_USE_PROXY?: [string, string][]
-//   [key:string]:any
-// }
-export interface ImportMetaEnv {
-  readonly VITE_BASE?:string
-  readonly VITE_USE_MOCK?:boolean
-  readonly VITE_USE_LEGACY?: boolean
-  readonly VITE_USE_PROXY?: [string, string][]
-  readonly [key:string]:any
+
+export type ProjectEnv ={
+  VITE_BASE:string
+  VITE_USE_LEGACY?: boolean
+  VITE_USE_PROXY?: [string, string][]
+   [key:string]:any
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ImportMetaEnv extends ProjectEnv{
 }
 
 interface ImportMeta {

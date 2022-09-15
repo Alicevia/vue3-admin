@@ -1,9 +1,10 @@
 import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
 import { analyseEnv } from './build/utils'
-import { registerPlugins, resolve, createViteBuild } from './build/vite'
+import { registerPlugins, resolve, createViteBuild, createViteServer } from './build/vite'
 // https://vitejs.dev/config/
-export default ({ command, mode, ssrBuild }:ConfigEnv):UserConfig => {
+export default ({ command, mode }:ConfigEnv):UserConfig => {
+  console.log(command, mode)
   const isBuild = command === 'build'
   const projectSettings = analyseEnv(loadEnv(mode, process.cwd()))
   const { VITE_BASE } = projectSettings
@@ -11,6 +12,7 @@ export default ({ command, mode, ssrBuild }:ConfigEnv):UserConfig => {
     base: VITE_BASE ?? '/',
     plugins: registerPlugins(projectSettings, isBuild),
     resolve,
-    build: createViteBuild()
+    build: createViteBuild(),
+    server: createViteServer(projectSettings)
   }
 }
