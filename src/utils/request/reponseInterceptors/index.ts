@@ -1,4 +1,4 @@
-import { createError } from './../../messageTip'
+import { createError } from '../error/messageTip'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { loginCheckMid } from './loginCheckMid'
 import compose from 'koa-compose'

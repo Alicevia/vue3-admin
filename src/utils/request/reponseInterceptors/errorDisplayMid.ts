@@ -1,4 +1,4 @@
-import { MessageTip } from '@/utils/messageTip'
+import { MessageTip } from '../error/messageTip'
 import type { AxiosResponse } from 'axios'
 
 export const errorDisplayMid = async (response: AxiosResponse, next: any) => {
