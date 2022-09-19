@@ -11,16 +11,16 @@ request.interceptors.request.use(requestResolve, (e) => {
   return Promise.reject(e)
 })
 request.interceptors.response.use(async (response) => {
-  return await responseResolve(response)
-    .then(() => response)
+  const a = await responseResolve(response)
     .catch(() => Promise.reject(createError(response)))
+  console.log(a)
+  return a
 }, responseReject)
 
-type RequestConfig = Omit<AxiosRequestConfig, 'url'>&{url:string}
+type RequestConfig = Omit<AxiosRequestConfig, 'url'> & {url:string}
 
 function myUseAxios<T> (defaultValue:T, config:RequestConfig, options?:UseAxiosOptions) {
   const result = useAxios(config.url, config, request, options ?? { immediate: true })
-  console.log(config)
 
   return { ...result, data: refDefault<T>(result.data, defaultValue) }
 }

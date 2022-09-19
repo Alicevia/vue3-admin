@@ -3,8 +3,9 @@ import type { AxiosResponse, AxiosError } from 'axios'
 import { loginCheckMid } from './loginCheckMid'
 import compose from 'koa-compose'
 import { errorDisplayMid } from './errorDisplayMid'
+import { formatResponse } from './formatResponse'
 
-const responseResolve = compose<AxiosResponse>([errorDisplayMid, loginCheckMid])
+const responseResolve = compose<AxiosResponse>([loginCheckMid, errorDisplayMid, formatResponse])
 const responseReject = (e: AxiosError) => {
   $message.error(e.message || 'network is so slow')
   $loadingBar?.error()

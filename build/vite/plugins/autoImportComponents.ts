@@ -4,8 +4,8 @@ export default () => {
   return Components({
     dirs: ['src/**/components'],
     dts: 'types/auto-import-components.d.ts',
-    extensions: ['vue'],
+    extensions: ['vue', 'ts'],
     resolvers: [NaiveUiResolver()],
-    include: [/\.vue$/, /\.vue\?vue/]
+    include: [/\.vue$/, /\.ts$/, /\.tsx$/, /\.vue\?vue/]
   })
 }

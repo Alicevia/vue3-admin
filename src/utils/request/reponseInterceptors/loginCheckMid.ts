@@ -5,9 +5,10 @@ export const loginCheckMid = async (
   response: AxiosResponse,
   next: () => void
 ) => {
+  console.log('sdf')
+  $loadingBar?.finish()
   const { code } = response.data
   if (code === 0) {
-    $loadingBar?.finish()
     return await next()
   }
   if (code === 401) {
