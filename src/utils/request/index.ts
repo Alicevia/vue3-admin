@@ -2,7 +2,7 @@ import { createError } from './error/messageTip'
 import axios, { type AxiosRequestConfig } from 'axios'
 import { responseResolve, responseReject } from './reponseInterceptors'
 import { requestResolve } from './requestInterceptors'
-import { useAxios, type UseAxiosOptions } from '@vueuse/integrations'
+import { useAxios, type UseAxiosOptions } from '@vueuse/integrations/useAxios'
 const request = axios.create({
   timeout: 10000
 })
@@ -19,7 +19,9 @@ request.interceptors.response.use(async (response) => {
 type RequestConfig = Omit<AxiosRequestConfig, 'url'>&{url:string}
 
 function myUseAxios<T> (defaultValue:T, config:RequestConfig, options?:UseAxiosOptions) {
-  const result = useAxios(config.url, config, request, options)
+  const result = useAxios(config.url, config, request, options ?? { immediate: true })
+  console.log(config)
+
   return { ...result, data: refDefault<T>(result.data, defaultValue) }
 }
 

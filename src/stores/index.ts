@@ -1,4 +1,14 @@
 import { createPinia } from 'pinia'
-const store = createPinia()
+import { useUserStore } from './user'
+import { useHeroStore } from './someModule'
+import type { App } from 'vue'
 
-export default store
+const store = createPinia()
+let userStore, heroStore
+const registerPinia = (app:App) => {
+  app.use(store)
+  userStore = useUserStore()
+  heroStore = useHeroStore()
+}
+
+export { registerPinia, userStore, heroStore }

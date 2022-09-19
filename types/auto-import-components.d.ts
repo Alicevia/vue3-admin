@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     A: typeof import('./../src/components/A.vue')['default']
     Footer: typeof import('./../src/layouts/components/Footer.vue')['default']
     Header: typeof import('./../src/layouts/components/Header.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

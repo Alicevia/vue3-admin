@@ -2,6 +2,8 @@ import type { ProjectEnv } from './../../types/configuration.d'
 import type { ProxyOptions, ServerOptions } from 'vite'
 
 export const createViteServer = (projectSettings:ProjectEnv):ServerOptions => {
+  console.log(projectSettings)
+
   const { VITE_USE_PROXY } = projectSettings
   for (const [prefix, target] of VITE_USE_PROXY!) {
     console.log([prefix, target])

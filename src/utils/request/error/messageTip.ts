@@ -11,7 +11,7 @@ export const createError = (response: AxiosError | AxiosResponse) => {
   if (response instanceof Error) {
     return {
       ...response.response,
-      name: response.config.url as string,
+      name: response.config.url,
       message: response.message
     }
   } else {

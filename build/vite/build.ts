@@ -15,7 +15,7 @@ export const createViteBuild = () => {
         chunkFileNames: 'static/js/[name]-[hash].js',
         entryFileNames: 'static/js/[name]-[hash].js',
         // assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-        manualChunks (id: any) {
+        manualChunks (id: string) {
           if (id.includes('node_modules')) {
             return 'vendor' // 代码分割为第三方包
           }
