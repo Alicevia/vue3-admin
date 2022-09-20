@@ -1,4 +1,3 @@
-import { createError } from './error/messageTip'
 import axios, { type AxiosRequestConfig } from 'axios'
 import { responseResolve, responseReject } from './reponseInterceptors'
 import { requestResolve } from './requestInterceptors'
@@ -10,19 +9,16 @@ const request = axios.create({
 request.interceptors.request.use(requestResolve, (e) => {
   return Promise.reject(e)
 })
-request.interceptors.response.use(async (response) => {
-  const a = await responseResolve(response)
-    .catch(() => Promise.reject(createError(response)))
-  console.log(a)
-  return a
-}, responseReject)
+request.interceptors.response.use(responseResolve, responseReject)
 
-type RequestConfig = Omit<AxiosRequestConfig, 'url'> & {url:string}
-
-function myUseAxios<T> (defaultValue:T, config:RequestConfig, options?:UseAxiosOptions) {
-  const result = useAxios(config.url, config, request, options ?? { immediate: true })
-
-  return { ...result, data: refDefault<T>(result.data, defaultValue) }
+interface ResponseData {
+  code:number;
+  data:any;
+  message:string
+}
+function useRequest<T> (url:string, config?:AxiosRequestConfig, options?:UseAxiosOptions) {
+  const result = useAxios(url, config ?? {}, request, options ?? { immediate: true })
+  return { ...result, data: resolveRef<T>(() => result.data.value?.data), responseData: resolveRef<ResponseData>(() => result.data.value) }
 }
 
-export { request, myUseAxios }
+export { request, useRequest }

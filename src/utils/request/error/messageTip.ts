@@ -5,7 +5,7 @@ interface MessageTipType {
 }
 export const MessageTip: MessageTipType = {
   401: '身份信息过期',
-  2: '服务器错误'
+  500: '服务器错误'
 }
 export const createError = (response: AxiosError | AxiosResponse) => {
   if (response instanceof Error) {

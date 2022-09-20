@@ -1,11 +1,18 @@
-import { createError } from '../error/messageTip'
-import type { AxiosResponse, AxiosError } from 'axios'
-import { loginCheckMid } from './loginCheckMid'
 import compose from 'koa-compose'
-import { errorDisplayMid } from './errorDisplayMid'
-import { formatResponse } from './formatResponse'
-
-const responseResolve = compose<AxiosResponse>([loginCheckMid, errorDisplayMid, formatResponse])
+import type { AxiosResponse, AxiosError } from 'axios'
+import { createError } from '../error/messageTip'
+import { loginCheckMid } from './loginCheckMid'
+import { endAnimation } from './endAnimation'
+import { formatResponseMid } from './formatResponseMid'
+const responseMiddleWares = compose<AxiosResponse>([endAnimation, loginCheckMid, formatResponseMid])
+const responseResolve = async (response:AxiosResponse) => {
+  try {
+    await responseMiddleWares(response)
+    return response
+  } catch (error) {
+    return Promise.reject(createError(response))
+  }
+}
 const responseReject = (e: AxiosError) => {
   $message.error(e.message || 'network is so slow')
   $loadingBar?.error()

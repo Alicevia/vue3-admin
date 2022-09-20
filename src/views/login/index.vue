@@ -1,18 +1,18 @@
 <template>
   <div>
     <div>{{ data }}</div>
-    <n-button @click="execute">
+    <n-button>
       执行
     </n-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getTest } from '@/api'
+import { userService } from '@/api'
 
-const { data, execute } = getTest()
-console.log(data)
-
+// const { data } = userService.getTest2()
+const { data, error } = userService.getTest()
+console.log(error)
 </script>
 <style scoped></style>
 <route lang="yaml">

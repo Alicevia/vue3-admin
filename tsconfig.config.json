@@ -8,6 +8,7 @@
   ],
   "compilerOptions": {
     "composite": true,
+    "experimentalDecorators": false,
     "types": [
       "node"
     ]

@@ -1,9 +1,10 @@
 import { MessageTip } from '../error/messageTip'
 import type { AxiosResponse } from 'axios'
 
-export const errorDisplayMid = async (response: AxiosResponse, next: any) => {
+export const endAnimation = async (response: AxiosResponse, next: any) => {
+  $loadingBar?.finish()
+
   const { code } = response.data
-  console.log('error')
   if (code !== 0) {
     $message.error(MessageTip[code])
   }

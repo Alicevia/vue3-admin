@@ -27,7 +27,7 @@ export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) 
   ]
   if (!isBuild) {
     plugins.push(Inspector({
-      enabled: true
+      enabled: false
     }))
   }
 
