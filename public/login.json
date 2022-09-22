@@ -1,8 +1,4 @@
 {
   "code": 0,
-  "data": {
-    "name": "xiaoming",
-    "token": "asdklfjalsdkjfasdf",
-    "age": 234
-  }
+  "data": "asdklfjalsdkjfasdf"
 }

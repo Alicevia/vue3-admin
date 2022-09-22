@@ -1,12 +1,9 @@
 export interface LoginParams {
-  password:string;
-  username:string
+  password: string;
+  username: string
 }
-export interface LoginData {
-  name?:string;
-  age?:number
-}
+export type LoginData = string
 export interface TestData {
-  name:string;
-  age:number
+  name: string;
+  age: number
 }

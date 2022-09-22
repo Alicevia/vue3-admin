@@ -4,10 +4,7 @@
       <n-input v-model:value="model.username"></n-input>
     </n-form-item>
     <n-form-item path="password" label="密码">
-      <n-input
-        v-model:value="model.password"
-        type="password"
-      ></n-input>
+      <n-input v-model:value="model.password" type="password"></n-input>
     </n-form-item>
     <n-button :loading="isLoading" round type="primary" @click="login">
       登录
@@ -18,22 +15,27 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { userService, type LoginParams } from '@/api'
+import { userStore } from '@/stores'
 
-const model:LoginParams = reactive({
+const model: LoginParams = reactive({
   password: undefined,
   username: undefined
 })
-
+const router = useRouter()
 const { data, error, isLoading, execute } = userService.login(model)
 const login = async () => {
   await execute()
   if (error.value) return Promise.reject(error)
+  userStore.token = data.value
+  router.push('/')
   $message.success('登录成功')
 }
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
 <route lang="yaml">
 meta:
   layout: custom
