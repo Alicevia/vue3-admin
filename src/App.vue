@@ -14,6 +14,7 @@
   </n-config-provider>
 </template>
 <script setup lang="ts">
+import { userStore } from './stores'
 
 </script>
 

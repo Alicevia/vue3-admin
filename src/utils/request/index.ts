@@ -11,14 +11,17 @@ request.interceptors.request.use(requestResolve, (e) => {
 })
 request.interceptors.response.use(responseResolve, responseReject)
 
-interface ResponseData {
+interface ResponseData<T> {
   code:number;
-  data:any;
+  data:T;
   message:string
 }
 function useRequest<T> (url:string, config?:AxiosRequestConfig, options?:UseAxiosOptions) {
-  const result = useAxios(url, config ?? {}, request, options ?? { immediate: true })
-  return { ...result, data: resolveRef<T>(() => result.data.value?.data), responseData: resolveRef<ResponseData>(() => result.data.value) }
+  const result = useAxios<ResponseData<T>>(url, config ?? {}, request, options ?? { immediate: false })
+  const data = ref<T>()
+  syncRefs(() => result.data.value?.data, data)
+
+  return { ...result, data, responseData: resolveRef<ResponseData<T>>(result.data) }
 }
 
 export { request, useRequest }

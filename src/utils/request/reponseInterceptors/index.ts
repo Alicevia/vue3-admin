@@ -3,14 +3,14 @@ import type { AxiosResponse, AxiosError } from 'axios'
 import { createError } from '../error/messageTip'
 import { loginCheckMid } from './loginCheckMid'
 import { endAnimation } from './endAnimation'
-import { formatResponseMid } from './formatResponseMid'
-const responseMiddleWares = compose<AxiosResponse>([endAnimation, loginCheckMid, formatResponseMid])
+import { dealWithErrorMid } from './dealWithErrorMid'
+const responseMiddleWares = compose<AxiosResponse>([endAnimation, loginCheckMid, dealWithErrorMid])
 const responseResolve = async (response:AxiosResponse) => {
   try {
     await responseMiddleWares(response)
     return response
   } catch (error) {
-    return Promise.reject(createError(response))
+    return Promise.reject(response)
   }
 }
 const responseReject = (e: AxiosError) => {

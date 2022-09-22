@@ -1,6 +1,10 @@
-export interface UserInfoParams {
+export interface LoginParams {
   password:string;
-  account:string
+  username:string
+}
+export interface LoginData {
+  name?:string;
+  age?:number
 }
 export interface TestData {
   name:string;

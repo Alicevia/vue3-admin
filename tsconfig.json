@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "strictNullChecks": false,
     "lib": [
       "ES2022"
     ],
