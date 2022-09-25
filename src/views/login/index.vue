@@ -14,23 +14,19 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { userService, type LoginParams } from '@/api'
 import { userStore } from '@/stores'
+import type { LoginParams } from '@/api'
 
-const model: LoginParams = reactive({
+const model:LoginParams = reactive({
   password: undefined,
   username: undefined
 })
 const router = useRouter()
-const { data, error, isLoading, execute } = userService.login(model)
+const { execute, isLoading } = userStore.useLogin(model)
 const login = async () => {
   await execute()
-  if (error.value) return Promise.reject(error)
-  userStore.token = data.value
   router.push('/')
-  $message.success('登录成功')
 }
-
 </script>
 
 <style scoped>
