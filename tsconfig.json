@@ -5,6 +5,7 @@
     "types/**/*"
   ],
   "compilerOptions": {
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "strictNullChecks": false,
     "lib": [

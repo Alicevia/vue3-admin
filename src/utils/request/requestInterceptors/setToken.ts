@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from 'axios'
 import { userStore } from '@/stores'
 export function setToken (config: AxiosRequestConfig): AxiosRequestConfig {
-  const token = userStore.token
+  const token = userStore.getToken()
   if (token) {
     config.headers
       ? (config.headers.Authorization = `Bearer ${token}`)

@@ -1,13 +1,17 @@
-import type { TestData, LoginParams, LoginData } from './user.d'
+import type { LoginParams, LoginData, UserInfoData, ValidateTokenData } from './user.d'
 import { BaseService } from '@/utils/service'
 
 class UserService extends BaseService {
-  getTest () {
-    return this.get<TestData>(this.setUrl('/test.json'))
-  }
-
   login (data?:LoginParams) {
     return this.get<LoginData>(this.setUrl('/login.json'), { data })
+  }
+
+  getUserInfo () {
+    return this.get<UserInfoData>(this.setUrl('/userInfo.json'))
+  }
+
+  validateToken () {
+    return this.get<ValidateTokenData>(this.setUrl('/validateToken.json'))
   }
 }
 const userService = new UserService('')

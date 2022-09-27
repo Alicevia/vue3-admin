@@ -3,7 +3,10 @@ export interface LoginParams {
   username: string
 }
 export type LoginData = string
-export interface TestData {
-  name: string;
+export interface UserInfoData {
+  account: string;
   age: number
+  name:string
 }
+
+export type ValidateTokenData=boolean
