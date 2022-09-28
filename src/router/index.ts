@@ -12,19 +12,24 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const token = userStore.getToken()
-  console.log(to.path, to)
-  if (userStore.isLogin) {
+  console.log(to.path, token, userStore.isLogin)
+  if (token) {
+    if (!userStore.isLogin) {
+      try {
+        await userStore.validateToken()
+      } catch (error) {
+        return next('/login')
+      }
+    }
     if (to.name === 'login') {
       return next('/')
     }
     return next()
-  }
-  if (token) {
-    try {
-      await userStore.checkToken()
-    } catch (error) {
-
+  } else {
+    if (to.name === 'login') {
+      return next()
     }
+    return next('/login')
   }
 })
 const docTitle = useTitle()

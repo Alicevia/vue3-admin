@@ -6,6 +6,10 @@ class UserService extends BaseService {
     return this.get<LoginData>(this.setUrl('/login.json'), { data })
   }
 
+  logout () {
+    return this.get<boolean>(this.setUrl('/logout.json'))
+  }
+
   getUserInfo () {
     return this.get<UserInfoData>(this.setUrl('/userInfo.json'))
   }

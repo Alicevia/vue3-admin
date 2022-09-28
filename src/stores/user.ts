@@ -60,11 +60,21 @@ export const useUserStore = defineStore('user', () => {
     if (error.value) return Promise.reject(error)
     storage.setUserInfo(data)
   }
+  const logout = async () => {
+    const { execute, error } = userService.logout()
+    await execute()
+    clearStore()
+    if (error.value) return Promise.reject(error)
+  }
   const validateToken = async () => {
     const { error, execute } = userService.validateToken()
     await execute()
-    if (error.value) return Promise.reject(error)
+    if (error.value) {
+      clearStore()
+      return Promise.reject(error)
+    }
     isLogin.value = true
   }
-  return { ...storage, clearStore, useLogin, getUserBaseInfo, isLogin, validateToken }
+
+  return { ...storage, clearStore, useLogin, getUserBaseInfo, logout, isLogin, validateToken }
 })
