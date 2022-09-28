@@ -1,5 +1,5 @@
 <template>
-  <div>event2</div>
+  <div>manage</div>
 </template>
 
 <script setup lang='ts'>
@@ -8,5 +8,6 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 事件2
+    title: 管理
+    sort: 1
 </route>

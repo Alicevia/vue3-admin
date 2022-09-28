@@ -35,4 +35,6 @@ const login = async () => {
 <route lang="yaml">
 meta:
   layout: custom
+  isMenu: false
+  title: 登录
 </route>

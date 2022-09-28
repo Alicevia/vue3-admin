@@ -2,17 +2,18 @@ import { createRouter, createWebHistory } from 'vue-router'
 import routes from '~pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { userStore } from '@/stores'
-const temp = setupLayouts(routes)
-console.log(routes, temp)
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: temp
+  routes: setupLayouts(routes)
 })
 
 router.beforeEach(async (to, from, next) => {
+  $loadingBar?.start()
+
   const token = userStore.getToken()
-  console.log(to.path, token, userStore.isLogin)
+
+  console.log(to.path, to.meta.title, to)
   if (token) {
     if (!userStore.isLogin) {
       try {
@@ -36,5 +37,6 @@ const docTitle = useTitle()
 
 router.afterEach((to) => {
   $loadingBar?.finish()
+  docTitle.value = to.matched.map(item => item.meta.title).filter(item => item).join('-')
 })
 export default router

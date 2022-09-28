@@ -1,7 +1,6 @@
-import { createError } from '../error/messageTip'
 
 import type { AxiosResponse } from 'axios'
-import { appStore, userStore } from '@/stores'
+import { userStore } from '@/stores'
 import router from '@/router'
 export const loginCheckMid = async (
   response: AxiosResponse,

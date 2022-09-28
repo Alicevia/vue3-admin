@@ -8,3 +8,8 @@
 
 </script>
 <style scoped></style>
+<route lang="yaml">
+  meta:
+    title: 事件
+    sort: 2
+  </route>
