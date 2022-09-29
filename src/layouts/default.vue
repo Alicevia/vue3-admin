@@ -8,7 +8,7 @@
         :native-scrollbar="false"
         bordered
       >
-        <n-menu :options="userStore.menuOptions"></n-menu>
+        <Menu></Menu>
       </n-layout-sider>
       <n-layout content-style="padding: 24px;" :native-scrollbar="false">
         <router-view></router-view>
@@ -25,9 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { userStore } from '@/stores'
-
-userStore.getUserBaseInfo()
 
 </script>
 <style scoped></style>

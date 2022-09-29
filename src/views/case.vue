@@ -13,4 +13,5 @@ console.log('routes', routes)
 <route lang="yaml">
   meta:
     title: 案例
+    icon: BookOutline
 </route>

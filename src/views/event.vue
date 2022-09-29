@@ -12,4 +12,5 @@
   meta:
     title: 事件
     sort: 2
+    icon: CashOutline
   </route>
