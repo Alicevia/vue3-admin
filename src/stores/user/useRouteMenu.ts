@@ -1,16 +1,28 @@
 import { renderIcon } from '@/components/RenderIcon'
+import { WHITE_LIST } from '@/constants'
+import { setupLayouts } from 'virtual:generated-layouts'
 import routes from '~pages'
 import { iconMap } from './iconList'
-
+import type { RouteRecordRaw } from 'vue-router'
+import router from '@/router'
 export function useCreateRouteAndMenu (routeAuth) {
-  const routeList = computed(() => {
-    return routes
-  })
+  const privateRoutes = setupLayouts([...routes]).filter(item => !WHITE_LIST.includes(item.path))
 
   const menuList = computed(() => {
-    return generateMenu(routeList.value) ?? []
+    return generateMenu(routes) ?? []
   })
-  return { menuList, routeList }
+  const clearRoutesCbStack = ref([])
+  const initRoutes = () => {
+    privateRoutes.forEach((route: RouteRecordRaw) => {
+      clearRoutesCbStack.value.push(router.addRoute(route))
+    })
+    console.log(privateRoutes, router.getRoutes())
+  }
+  const clearRoutes = () => {
+    clearRoutesCbStack.value.forEach((removeRoute) => removeRoute())
+    clearRoutesCbStack.value = []
+  }
+  return { menuList, initRoutes, clearRoutes }
 }
 function generateMenu (routes) {
   if (Array.isArray(routes) && routes.length > 0) {
