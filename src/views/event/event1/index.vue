@@ -10,5 +10,5 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 事件1
+    label: 事件1
 </route>

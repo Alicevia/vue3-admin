@@ -18,8 +18,8 @@ export const useUserStore = defineStore('user', () => {
         clearStore()
         return Promise.reject(error)
       }
-      isLogin.value = true
       storage.setToken(res.data.value)
+      await getUserBaseInfo()
       initRoutes()
     }
     return { ...res, execute }
@@ -37,13 +37,14 @@ export const useUserStore = defineStore('user', () => {
       clearStore()
       return Promise.reject(error)
     }
-    isLogin.value = true
+    await getUserBaseInfo()
     initRoutes()
   }
   const getUserBaseInfo = async () => {
     const { data, error, execute } = userService.getUserInfo()
     await execute()
     if (error.value) return Promise.reject(error)
+    isLogin.value = true
     userInfo.value = data.value
   }
   const clearStore = () => {
@@ -60,7 +61,8 @@ export const useUserStore = defineStore('user', () => {
     logout,
     useLogin,
     userInfo,
-    menuList
+    menuList,
+    isLogin
 
   }
 })

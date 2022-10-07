@@ -11,5 +11,5 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 案例
+    label: 案例
 </route>

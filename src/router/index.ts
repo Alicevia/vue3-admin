@@ -4,7 +4,7 @@ import routes from '~pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { userStore } from '@/stores'
 
-const baseRoute = setupLayouts(routes).filter(item => WHITE_LIST.includes(item.path))
+const baseRoute = setupLayouts(routes.filter(item => WHITE_LIST.includes(item.path)))
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: baseRoute
@@ -12,14 +12,14 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   $loadingBar?.start()
-
+  console.log(to)
   const token = userStore.getToken()
 
-  console.log(to.path, to.meta.title, to)
   if (token) {
     if (!userStore.isLogin) {
       try {
         await userStore.validateToken()
+        return next(to)
       } catch (error) {
         return next('/login')
       }
@@ -27,6 +27,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.name === 'login') {
       return next('/')
     }
+
     return next()
   } else {
     if (to.name === 'login') {
@@ -39,6 +40,6 @@ const docTitle = useTitle()
 
 router.afterEach((to) => {
   $loadingBar?.finish()
-  docTitle.value = to.matched.map(item => item.meta.title).filter(item => item).join('-')
+  docTitle.value = to.matched.map(item => item.meta.label).filter(item => item).join('-')
 })
 export default router

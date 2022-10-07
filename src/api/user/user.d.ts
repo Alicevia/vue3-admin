@@ -4,9 +4,10 @@ export interface LoginParams {
 }
 export type LoginData = string
 export interface UserInfoData {
-  account?: string;
+  account?: string
   age?: number
   name?:string
+  auth?:string[]
 }
 
 export type ValidateTokenData=boolean

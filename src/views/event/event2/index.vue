@@ -8,5 +8,5 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 事件2
+    label: 事件2
 </route>

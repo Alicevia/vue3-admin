@@ -36,5 +36,5 @@ const login = async () => {
 meta:
   layout: custom
   isMenu: false
-  title: 登录
+  label: 登录
 </route>

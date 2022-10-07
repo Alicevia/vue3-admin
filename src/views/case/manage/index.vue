@@ -8,6 +8,6 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 管理
+    label: 管理
     sort: 1
 </route>

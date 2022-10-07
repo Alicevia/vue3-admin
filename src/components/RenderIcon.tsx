@@ -1,12 +1,19 @@
 import type { Component } from 'vue'
-
 const RenderIcon = defineComponent({
+  props: {
+    a: {
+      type: Number
+    }
+  },
   setup (props, { slots }) {
     return () => {
-      return <n-icon v-bind={props}>{slots.default?.()}</n-icon>
+      return <n-icon {...props}>{slots.default?.() ?? null }</n-icon>
     }
   }
 })
-export default RenderIcon
-const renderIcon = (icon:Component) => h(RenderIcon, null, { default: () => h(icon) })
+function renderIcon (icon: Component, props?:any) {
+  return () => h(RenderIcon, props, { default: () => h(icon) })
+}
 export { renderIcon }
+
+export default RenderIcon

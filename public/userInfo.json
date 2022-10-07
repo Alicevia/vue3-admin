@@ -3,6 +3,12 @@
   "data": {
     "account": "小米",
     "age": 13,
-    "name": "sds"
+    "name": "sds",
+    "auth": [
+      "index",
+      "case",
+      "case-list",
+      "event"
+    ]
   }
 }

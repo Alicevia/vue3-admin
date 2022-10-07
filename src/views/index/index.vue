@@ -24,6 +24,6 @@ const logout = () => {
 <style scoped></style>
 <route lang="yaml">
   meta:
-    title: 首页
+    label: 首页
     icon: GameControllerOutline
 </route>

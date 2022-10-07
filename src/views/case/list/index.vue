@@ -8,5 +8,5 @@
 </style>
 <route lang="yaml">
   meta:
-    title: 列表
+    label: 列表
 </route>
