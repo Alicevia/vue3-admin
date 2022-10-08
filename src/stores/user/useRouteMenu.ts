@@ -33,8 +33,8 @@ export function useCreateRouteAndMenu (userInfo:Ref<UserInfoData>) {
 
 function generateMenu (routes:RouteRecordRaw[]):MenuOption[] {
   if (Array.isArray(routes) && routes.length > 0) {
-    return routes.filter(item => item.meta.isMenu !== false).sort((a, b) => {
-      return (a.meta.sort ?? 1) - (b.meta.sort ?? 2)
+    return routes.filter(item => item.meta?.isMenu !== false).sort((a, b) => {
+      return (a.meta?.sort ?? 1) - (b.meta?.sort ?? 2)
     }).map(item => {
       return {
         icon: item.meta?.icon && renderIcon(iconMap[item.meta.icon]),
@@ -45,7 +45,7 @@ function generateMenu (routes:RouteRecordRaw[]):MenuOption[] {
               name: item.name
             }
           },
-          { default: () => item.meta.label }
+          { default: () => item.meta?.label }
         ),
         key: item.name as string,
         children: generateMenu(item.children)
