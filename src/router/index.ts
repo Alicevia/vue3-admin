@@ -12,9 +12,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   $loadingBar?.start()
-  console.log(to)
   const token = userStore.getToken()
-
   if (token) {
     if (!userStore.isLogin) {
       try {

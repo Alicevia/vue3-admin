@@ -36,7 +36,6 @@ function generateMenu (routes:RouteRecordRaw[]):MenuOption[] {
     return routes.filter(item => item.meta.isMenu !== false).sort((a, b) => {
       return (a.meta.sort ?? 1) - (b.meta.sort ?? 2)
     }).map(item => {
-      console.log(item.name)
       return {
         icon: item.meta?.icon && renderIcon(iconMap[item.meta.icon]),
         label: () => h(

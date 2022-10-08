@@ -37,15 +37,18 @@ export const useUserStore = defineStore('user', () => {
       clearStore()
       return Promise.reject(error)
     }
-    await getUserBaseInfo()
-    initRoutes()
+    return await getUserBaseInfo()
   }
   const getUserBaseInfo = async () => {
     const { data, error, execute } = userService.getUserInfo()
     await execute()
-    if (error.value) return Promise.reject(error)
+    if (error.value) {
+      clearStore()
+      return Promise.reject(error)
+    }
     isLogin.value = true
     userInfo.value = data.value
+    initRoutes()
   }
   const clearStore = () => {
     isLogin.value = false

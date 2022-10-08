@@ -1,5 +1,4 @@
 // function setLocalStorage (target) {
-//   console.dir(target)
 //   // target.prototype.clear = localStorage.clear
 //   // target.prototype.getItem = localStorage.getItem
 //   // target.prototype.removeItem = localStorage.removeItem
