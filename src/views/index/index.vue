@@ -1,15 +1,10 @@
 <template>
   <div>
     <n-button @click="logout">
-      退出12234233
+      退出12312312334
     </n-button>
-    <n-button @click="userStore.getToken">
-      获取token
-    </n-button>
-    <n-button @click="userStore.setToken('234234')">
-      设置token
-    </n-button>
-    <ul class="container">
+
+    <!-- <ul class="container">
       <li
         v-for="(item,index) in list"
         :key="item.title" class="item"
@@ -22,17 +17,19 @@
       >
         {{ item.title }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { userStore } from '@/stores'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { useUserStore } from '@/stores'
+import { a } from '@/stores/test'
 
-console.log(userStore, '?')
+const userStore = useUserStore()
 const router = useRouter()
+
+const v = a()
+
 const logout = () => {
   userStore.logout().finally(() => {
     router.replace('/login')
@@ -40,8 +37,8 @@ const logout = () => {
 }
 
 const list = ref([
-  { title: 'abc' },
-  { title: 'abc2' },
+  { title: 'a113' },
+  { title: 'absdfc2' },
   { title: 'abc3' },
   { title: 'abc4' }
 ])
@@ -51,6 +48,7 @@ const dragStart = (e) => {
   console.log('dragStart', e)
   e.target.style.opacity = 0
 }
+
 const dragOver = (e, index) => {
   e.preventDefault()
   // console.log(e)
@@ -66,6 +64,7 @@ const dragLeave = (e, index) => {
   console.log('dragLeave', e)
 }
 </script>
+
 <style scoped>
   .container{
 
@@ -80,4 +79,5 @@ const dragLeave = (e, index) => {
   meta:
     label: 首页
     icon: GameControllerOutline
+    sort: 1
 </route>

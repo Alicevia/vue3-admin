@@ -1,10 +1,15 @@
 <template>
   <div>
-    <img src="@/assets/9eb1990004a72191c8120c1fc2251781.jpeg" alt="">
+    2231
+    123334234
   </div>
 </template>
 
 <script setup lang='ts'>
+import { useUserStore } from '@/stores'
+
+const userStore = useUserStore()
+
 </script>
 <style scoped>
 </style>

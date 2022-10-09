@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig } from 'axios'
-import { userStore } from '@/stores'
+import { useUserStore } from '@/stores'
 export function setToken (config: AxiosRequestConfig): AxiosRequestConfig {
+  const userStore = useUserStore()
   const token = userStore.getToken()
   if (token) {
     config.headers

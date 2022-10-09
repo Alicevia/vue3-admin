@@ -1,9 +1,11 @@
 import { WHITE_LIST } from './../constants/index'
 import { createRouter, createWebHistory } from 'vue-router'
-import routes from '~pages'
 import { setupLayouts } from 'virtual:generated-layouts'
-import { userStore } from '@/stores'
+import { useUserStore } from '@/stores'
+import routes from '~pages'
 
+// const routes = []
+console.log(routes)
 const baseRoute = setupLayouts(routes.filter(item => WHITE_LIST.includes(item.path)))
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +13,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  const userStore = useUserStore()
+
   $loadingBar?.start()
   const token = userStore.getToken()
   if (token) {

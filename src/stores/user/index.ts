@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { userService, type LoginParams, type UserInfoData } from '@/api'
-
 import { useMyStorage } from './useMyStorage'
 import { useCreateRouteAndMenu } from './useRouteMenu'
+
 export const useUserStore = defineStore('user', () => {
   const storage = useMyStorage()
 
@@ -19,11 +19,18 @@ export const useUserStore = defineStore('user', () => {
         return Promise.reject(error)
       }
       storage.setToken(res.data.value)
-      await getUserBaseInfo()
-      initRoutes()
+      try {
+        res.isLoading.value = true
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        await getUserBaseInfo()
+      } catch (error:any) {
+        res.error.value = error?.value
+      }
+      res.isLoading.value = false
     }
     return { ...res, execute }
   }
+
   const logout = async () => {
     const { execute, error } = userService.logout()
     await execute()

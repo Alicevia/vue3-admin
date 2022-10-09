@@ -1,14 +1,17 @@
 import { WHITE_LIST } from '@/constants'
 import { setupLayouts } from 'virtual:generated-layouts'
-import routes from '~pages'
 import { iconMap } from './iconList'
-import type { RouteRecordRaw } from 'vue-router'
 import router from '@/router'
-import { renderIcon } from '@/components/RenderIcon'
-import type { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
+import { renderIcon } from '@/components/RenderIcon'
+
+import type { RouteRecordRaw } from 'vue-router'
+import type { MenuOption } from 'naive-ui'
 import type { UserInfoData } from '@/api'
 import type { Ref } from 'vue'
+import routes from 'virtual:generated-pages'
+console.log(routes)
+
 export function useCreateRouteAndMenu (userInfo:Ref<UserInfoData>) {
   const privateRoutes = computed(() => {
     const ary = routes.filter(item => !WHITE_LIST.includes(item.path))
@@ -38,15 +41,17 @@ function generateMenu (routes:RouteRecordRaw[]):MenuOption[] {
     }).map(item => {
       return {
         icon: item.meta?.icon && renderIcon(iconMap[item.meta.icon]),
-        label: () => h(
-          RouterLink,
-          {
-            to: {
-              name: item.name
-            }
-          },
-          { default: () => item.meta?.label }
-        ),
+        label: item.children.length
+          ? item.meta?.label
+          : () => h(
+              RouterLink,
+              {
+                to: {
+                  name: item.name
+                }
+              },
+              { default: () => item.meta?.label }
+            ),
         key: item.name as string,
         children: generateMenu(item.children)
       }
@@ -69,13 +74,6 @@ function generateRoute (routes, auth) {
       pre.push({ ...item, children: [] })
     }
 
-    // if (auth.includes(item.name)) {
-    //   if (item.children?.length) {
-    //     pre.push({ ...item, children: generateRoute(item.children, auth) })
-    //   } else {
-    //     pre.push({ ...item, children: undefined })
-    //   }
-    // }
     return pre
   }, [])
 }
