@@ -57,6 +57,7 @@ export const useUserStore = defineStore('user', () => {
     userInfo.value = data.value
     initRoutes()
   }
+
   const clearStore = () => {
     isLogin.value = false
     userInfo.value = {}

@@ -1,21 +1,16 @@
-import { WHITE_LIST } from '@/constants'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { iconMap } from './iconList'
-import router from '@/router'
-import { RouterLink } from 'vue-router'
+import { RouterLink, type RouteRecordRaw } from 'vue-router'
 import { renderIcon } from '@/components/RenderIcon'
+import router, { privateRoutes as _routes } from '@/router'
 
-import type { RouteRecordRaw } from 'vue-router'
 import type { MenuOption } from 'naive-ui'
 import type { UserInfoData } from '@/api'
 import type { Ref } from 'vue'
-import routes from 'virtual:generated-pages'
-console.log(routes)
 
 export function useCreateRouteAndMenu (userInfo:Ref<UserInfoData>) {
   const privateRoutes = computed(() => {
-    const ary = routes.filter(item => !WHITE_LIST.includes(item.path))
-    return generateRoute(ary, userInfo.value.auth ?? [])
+    return generateRoute(_routes, userInfo.value.auth ?? [])
   })
 
   const menuList = computed(() => {

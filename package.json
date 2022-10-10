@@ -18,6 +18,7 @@
     "mitt": "^3.0.0",
     "naive-ui": "^2.33.2",
     "pinia": "^2.0.17",
+    "reflect-metadata": "^0.1.13",
     "vue": "^3.2.39",
     "vue-router": "^4.1.3"
   },

@@ -8,5 +8,5 @@
 </style>
 <route lang="yaml">
   meta:
-    label: 案例首页
+    label: 案例统计
 </route>

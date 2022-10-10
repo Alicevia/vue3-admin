@@ -1,9 +1,7 @@
 import { useRequest } from '@/utils/request'
-export const urlPrefixDecoratorFactor = (prefix:string) => {
-  return (target:Function) => {
-    console.log(target)
-  }
-}
+
+export * from './decorator'
+
 export class BaseService {
   prefix:string
   constructor (prefix:string) {
@@ -14,9 +12,17 @@ export class BaseService {
     return this.prefix + url
   }
 
-  get = useRequest
+  get (...arg:Parameters<typeof useRequest>) {
+    arg[1] = { ...arg[1] ?? {}, method: 'get' }
+    return useRequest(...arg)
+  }
+
   post (...arg:Parameters<typeof useRequest>) {
     arg[1] = { ...arg[1] ?? {}, method: 'post' }
     return useRequest(...arg)
+  }
+
+  request (...arg:Parameters<typeof useRequest>) {
+    return useRequest.call(this, ...arg)
   }
 }

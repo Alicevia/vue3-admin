@@ -1,7 +1,7 @@
 <template>
   <div>
     <n-button @click="logout">
-      退出12312312334
+      退出
     </n-button>
 
     <!-- <ul class="container">
@@ -24,8 +24,8 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores'
 import { a } from '@/stores/test'
-
 const userStore = useUserStore()
+
 const router = useRouter()
 
 const v = a()
@@ -35,7 +35,6 @@ const logout = () => {
     router.replace('/login')
   })
 }
-
 const list = ref([
   { title: 'a113' },
   { title: 'absdfc2' },
@@ -63,6 +62,7 @@ const dragEnter = (e, index) => {
 const dragLeave = (e, index) => {
   console.log('dragLeave', e)
 }
+
 </script>
 
 <style scoped>

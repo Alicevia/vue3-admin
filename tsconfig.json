@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "strictNullChecks": false,
+    "emitDecoratorMetadata": true,
     "lib": [
       "ES2022"
     ],
