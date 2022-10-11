@@ -12,10 +12,7 @@ export class BaseService {
     return this.prefix + url
   }
 
-  get (...arg:Parameters<typeof useRequest>) {
-    arg[1] = { ...arg[1] ?? {}, method: 'get' }
-    return useRequest(...arg)
-  }
+  get = useRequest
 
   post (...arg:Parameters<typeof useRequest>) {
     arg[1] = { ...arg[1] ?? {}, method: 'post' }

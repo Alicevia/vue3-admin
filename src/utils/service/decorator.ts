@@ -5,8 +5,8 @@ export function GET (url?:string) {
   return (target, propertyKey, descriptor) => {
     const origin = descriptor.value
 
-    descriptor.value = function (...args) {
-      origin.call(target, ...args)
+    descriptor.value = function () {
+      return origin(useRequest(url))
     }
   }
 }
