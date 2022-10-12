@@ -2,17 +2,22 @@ import type { LoginParams, LoginData, UserInfoData, ValidateTokenData } from './
 import { BaseService } from '@/utils/service'
 
 class UserService extends BaseService {
-  login (data?:LoginParams) {
-    return this.get<LoginData>(this.setUrl('/login.json'), { data })
+  login (data:LoginParams) {
+    return this.get<LoginData>('/login.json', { data })
+  }
+
+  logout () {
+    return this.get<boolean>('/logout.json')
   }
 
   getUserInfo () {
-    return this.get<UserInfoData>(this.setUrl('/userInfo.json'))
+    return this.get<UserInfoData>('/userInfo.json')
   }
 
   validateToken () {
-    return this.get<ValidateTokenData>(this.setUrl('/validateToken.json'))
+    return this.get<ValidateTokenData>('/validateToken.json')
   }
 }
-const userService = new UserService('')
+const userService = new UserService()
+console.log(userService)
 export { userService }

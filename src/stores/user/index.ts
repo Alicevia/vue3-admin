@@ -74,6 +74,5 @@ export const useUserStore = defineStore('user', () => {
     userInfo,
     menuList,
     isLogin
-
   }
 })
