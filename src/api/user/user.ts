@@ -19,5 +19,5 @@ class UserService extends BaseService {
   }
 }
 const userService = new UserService()
-console.log(userService)
+
 export { userService }

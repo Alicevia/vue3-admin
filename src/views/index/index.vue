@@ -4,7 +4,7 @@
       退出
     </n-button>
 
-    <!-- <ul class="container">
+    <ul ref="ulRef" class="container">
       <li
         v-for="(item,index) in list"
         :key="item.title" class="item"
@@ -13,22 +13,21 @@
         @dragenter="dragEnter($event,index)"
         @dragleave="dragLeave($event,index)"
         @drop="drop($event,index)"
-        @dragstart="dragStart"
+        @dragstart="dragStart($event,index)"
       >
+        <div class="i-line-md:alert"></div>
         {{ item.title }}
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores'
-import { a } from '@/stores/test'
 const userStore = useUserStore()
 
 const router = useRouter()
-
-const v = a()
+const ulRef = ref(null)
 
 const logout = () => {
   userStore.logout().finally(() => {
@@ -41,11 +40,11 @@ const list = ref([
   { title: 'abc3' },
   { title: 'abc4' }
 ])
-
-const dragStart = (e) => {
+let current
+const dragStart = (e, index) => {
   e.dataTransfer.setData('text/plain', 'i love you')
   console.log('dragStart', e)
-  e.target.style.opacity = 0
+  current = index
 }
 
 const dragOver = (e, index) => {
@@ -57,6 +56,16 @@ const drop = (e, index) => {
   console.log('drop', e)
 }
 const dragEnter = (e, index) => {
+  console.log(e, index)
+  if (index == current) return
+  const a = list.value[current]
+  const b = list.value[index]
+  list.value[current] = b
+  list.value[index] = a
+  current = index
+  console.log(current, 'current')
+  // ulRef.value.insertBefore(current, e.target)
+
   console.log('dragEnter', e)
 }
 const dragLeave = (e, index) => {

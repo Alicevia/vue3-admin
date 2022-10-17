@@ -8,12 +8,14 @@ import VueSetUpExtend from 'vite-plugin-vue-setup-extend'
 import Inspector from 'vite-plugin-vue-inspector'
 import legacy from '@vitejs/plugin-legacy'
 import FileRoute from './fileRoute'
+import Unocss from './unocss'
 
 export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) => {
   const { VITE_USE_LEGACY } = projectSettings
   const plugins = [
     vue(),
     vueJsx(),
+    Unocss(),
     FileRoute(),
     Layouts({
       layoutsDirs: 'src/layouts'
