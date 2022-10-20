@@ -4,7 +4,7 @@
       退出
     </n-button>
 
-    <ul ref="ulRef" class="container">
+    <TransitionGroup ref="ulRef" tag="ul" name="list" class="container">
       <li
         v-for="(item,index) in list"
         :key="item.title" class="item"
@@ -18,7 +18,10 @@
         <div class="i-line-md:alert"></div>
         {{ item.title }}
       </li>
-    </ul>
+    </TransitionGroup>
+    <div class="tz">
+      alkdfalskd
+    </div>
   </div>
 </template>
 
@@ -40,7 +43,7 @@ const list = ref([
   { title: 'abc3' },
   { title: 'abc4' }
 ])
-let current
+let current:number
 const dragStart = (e, index) => {
   e.dataTransfer.setData('text/plain', 'i love you')
   console.log('dragStart', e)
@@ -49,38 +52,56 @@ const dragStart = (e, index) => {
 
 const dragOver = (e, index) => {
   e.preventDefault()
+
   // console.log(e)
 }
 
 const drop = (e, index) => {
-  console.log('drop', e)
+  // console.log('drop', e)
 }
 const dragEnter = (e, index) => {
-  console.log(e, index)
+  e.preventDefault()
   if (index == current) return
-  const a = list.value[current]
-  const b = list.value[index]
-  list.value[current] = b
-  list.value[index] = a
-  current = index
-  console.log(current, 'current')
-  // ulRef.value.insertBefore(current, e.target)
-
-  console.log('dragEnter', e)
+  setTimeout(() => {
+    const temp = list.value[index]
+    list.value[index] = list.value[current]
+    list.value[current] = temp
+    console.log(current, index)
+    current = index
+  }, 30)
 }
 const dragLeave = (e, index) => {
-  console.log('dragLeave', e)
+  // console.log('dragLeave', e)
 }
 
 </script>
 
 <style scoped>
+.tz{
+  cursor: e-resize;
+  border: 1px solid black;
+  height: 300px;
+  width: 300px;
+}
+.list-move, /* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
   .container{
 
   }
   .item {
     background-color: pink;
-    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid white;
 
     }
 </style>
