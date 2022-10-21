@@ -6,7 +6,7 @@ export const createViteBuild = () => {
     assetsDir: 'static/assets',
     assetsInlineLimit: 1024 * 4,
     cssCodeSplit: true,
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [],

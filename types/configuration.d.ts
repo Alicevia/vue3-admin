@@ -7,7 +7,7 @@ export type ProjectEnv ={
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ImportMetaEnv extends Partial<ProjectEnv>{
+export interface ImportMetaEnv extends ProjectEnv{
 }
 
 interface ImportMeta {
