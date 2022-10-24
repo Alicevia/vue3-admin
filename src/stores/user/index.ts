@@ -21,7 +21,6 @@ export const useUserStore = defineStore('user', () => {
       storage.setToken(res.data.value)
       try {
         res.isLoading.value = true
-        await new Promise(resolve => setTimeout(resolve, 2000))
         await getUserBaseInfo()
       } catch (error:any) {
         res.error.value = error?.value

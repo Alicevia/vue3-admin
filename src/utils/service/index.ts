@@ -1,6 +1,6 @@
 import { request, useRequest } from '@/utils'
-import type { Method } from 'axios'
-
+import type { AxiosRequestConfig, Method } from 'axios'
+import qs from 'qs'
 export class BaseService {
   prefix:string
   constructor (prefix = '') {
@@ -32,3 +32,46 @@ export class BaseService {
   _post = request.post
   _delete = request.delete
 }
+class RequestCache {
+  private cache = new Map()
+  msg = '取消重复请求'
+  clearCache (key?:string) :void {
+    if (key) {
+      this.remove(key)
+    } else {
+      this.cache.forEach(item => {
+        console.log(this.msg)
+        item(this.msg)
+      })
+      this.cache = new Map()
+    }
+  }
+
+  createKey (config:AxiosRequestConfig) {
+    const params = config.params ? qs.stringify(config.params) : ''
+    const data = config.data ? qs.stringify(config.data) : ''
+    const key = config.method + config.url + params + data
+    return key
+  }
+
+  triggerCacheFn (key:string) {
+    console.log(key, this.cache, typeof this.cache.get(key))
+    if (this.cache.has(key)) {
+      this.cache.get(key)(this.msg)
+    }
+  }
+
+  add (key:string, f:AbortController['abort']) {
+    this.triggerCacheFn(key)
+    this.remove(key)
+    this.cache.set(key, f)
+  }
+
+  remove (key:string) {
+    if (this.cache.has(key)) {
+      this.cache.delete(key)
+    }
+  }
+}
+
+export const requestCache = new RequestCache()
