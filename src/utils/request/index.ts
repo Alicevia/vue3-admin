@@ -7,6 +7,7 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(requestResolve, (e) => {
+  console.log(e)
   return Promise.reject(e)
 })
 request.interceptors.response.use(responseResolve, responseReject)
@@ -20,7 +21,6 @@ function useRequest<T> (url:string, config?:AxiosRequestConfig, options?:UseAxio
   const result = useAxios<ResponseData<T>>(url, config ?? {}, request, options ?? { immediate: false })
   const data = ref<T>()
   syncRefs(() => result.data.value?.data, data)
-
   return { ...result, data, responseData: resolveRef<ResponseData<T>>(result.data) }
 }
 

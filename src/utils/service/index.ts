@@ -1,5 +1,5 @@
 import { request, useRequest } from '@/utils'
-import type { AxiosRequestConfig, Method } from 'axios'
+import type { AxiosRequestConfig, CancelTokenSource, Method } from 'axios'
 import qs from 'qs'
 export class BaseService {
   prefix:string
@@ -40,7 +40,6 @@ class RequestCache {
       this.remove(key)
     } else {
       this.cache.forEach(item => {
-        console.log(this.msg)
         item(this.msg)
       })
       this.cache = new Map()
@@ -55,16 +54,19 @@ class RequestCache {
   }
 
   triggerCacheFn (key:string) {
-    console.log(key, this.cache, typeof this.cache.get(key))
     if (this.cache.has(key)) {
       this.cache.get(key)(this.msg)
     }
   }
 
-  add (key:string, f:AbortController['abort']) {
+  add (key:string, f:CancelTokenSource['cancel']) {
     this.triggerCacheFn(key)
     this.remove(key)
     this.cache.set(key, f)
+  }
+
+  isExist (key:string) {
+    return this.cache.has(key)
   }
 
   remove (key:string) {

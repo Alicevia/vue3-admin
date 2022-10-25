@@ -6,7 +6,7 @@
     <n-form-item path="password" label="密码">
       <n-input v-model:value="model.password" type="password"></n-input>
     </n-form-item>
-    <n-button round type="primary" @click="login">
+    <n-button :loading="isLoading" round type="primary" @click="login">
       登录
     </n-button>
   </n-form>

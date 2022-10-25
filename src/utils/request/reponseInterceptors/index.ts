@@ -4,7 +4,7 @@ import { createError } from '../error/messageTip'
 import { loginCheckMid } from './loginCheckMid'
 import { endAnimation } from './endAnimation'
 import { dealWithErrorMid } from './dealWithErrorMid'
-import { requestCache } from '@/utils'
+import axios from 'axios'
 const responseMiddleWares = compose<AxiosResponse>([endAnimation, loginCheckMid, dealWithErrorMid])
 const responseResolve = async (response:AxiosResponse) => {
   try {
@@ -15,10 +15,11 @@ const responseResolve = async (response:AxiosResponse) => {
   }
 }
 const responseReject = (e: AxiosError) => {
-  $message.error(e.message || 'network is so slow')
   $loadingBar?.error()
-  console.dir(e)
-  // requestCache.remove(requestCache.createKey(e.config))
+  if (!axios.isCancel(e)) {
+    console.log(e)
+    $message.error(e.message || 'network is so slow')
+  }
   return Promise.reject(e)
 }
 export { responseResolve, responseReject }

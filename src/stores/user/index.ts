@@ -12,16 +12,17 @@ export const useUserStore = defineStore('user', () => {
 
   const useLogin = (model:LoginParams) => {
     const res = userService.login(model)
-    const execute:typeof res.execute = async () => {
-      const { error } = await res.execute()
-      if (error.value) {
+    const execute = async () => {
+      await res.execute()
+
+      if (res.error.value) {
         clearStore()
-        return Promise.reject(error)
+        return
       }
-      storage.setToken(res.data.value)
       try {
         res.isLoading.value = true
         await getUserBaseInfo()
+        storage.setToken(res.data.value)
       } catch (error:any) {
         res.error.value = error?.value
       }
@@ -50,6 +51,7 @@ export const useUserStore = defineStore('user', () => {
     await execute()
     if (error.value) {
       clearStore()
+      $message.error('获取用户信息失败,请重新登陆')
       return Promise.reject(error)
     }
     isLogin.value = true
