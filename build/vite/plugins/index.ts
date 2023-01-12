@@ -10,7 +10,7 @@ import legacy from '@vitejs/plugin-legacy'
 import FileRoute from './fileRoute'
 import Unocss from './unocss'
 
-export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) => {
+export const registerPlugins = (projectSettings: ImportMetaEnv, isBuild: boolean) => {
   const { VITE_USE_LEGACY } = projectSettings
   const plugins = [
     vue(),
@@ -26,7 +26,8 @@ export const registerPlugins = (projectSettings:ImportMetaEnv, isBuild:boolean) 
   ]
   if (!isBuild) {
     plugins.push(Inspector({
-      enabled: false
+      enabled: false,
+      toggleComboKey: 'control'
     }))
   }
 

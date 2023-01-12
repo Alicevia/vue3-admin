@@ -1,3 +1,5 @@
 module.exports = {
-  extends: ['@alicevia', './.eslintrc-auto-import-api.json']
+
+  root:true,
+  extends: ['./.eslintrc-auto-import-api.json']
 }
