@@ -1,6 +1,5 @@
 import compose from 'koa-compose'
 import type { AxiosResponse, AxiosError } from 'axios'
-import { createError } from '../error/messageTip'
 import { loginCheckMid } from './loginCheckMid'
 import { endAnimation } from './endAnimation'
 import { dealWithErrorMid } from './dealWithErrorMid'
@@ -17,7 +16,6 @@ const responseResolve = async (response:AxiosResponse) => {
 const responseReject = (e: AxiosError) => {
   $loadingBar?.error()
   if (!axios.isCancel(e)) {
-    console.log(e)
     $message.error(e.message || 'network is so slow')
   }
   return Promise.reject(e)
