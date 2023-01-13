@@ -1,17 +1,15 @@
-
 import type { AxiosResponse } from 'axios'
-import { useUserStore } from '@/stores'
+import { userStore } from '@/stores'
 import router from '@/router'
 export const loginCheckMid = async (
   response: AxiosResponse,
-  next: () => void
+  next: () => void,
 ) => {
   const { code } = response.data
-  const userStore = useUserStore()
 
   if (code === 401) {
     // 清空数据退出
-    userStore.clearStore()
+    userStore.value.clearStore()
     router.replace('/login')
     return Promise.reject(response)
   }

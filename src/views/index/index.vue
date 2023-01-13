@@ -26,14 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores'
-const userStore = useUserStore()
+import { userStore } from '@/stores'
 
 const router = useRouter()
 const ulRef = ref(null)
 
 const logout = () => {
-  userStore.logout().finally(() => {
+  userStore.value.logout().finally(() => {
     router.replace('/login')
   })
 }
@@ -41,12 +40,11 @@ const list = ref([
   { title: 'a113' },
   { title: 'absdfc2' },
   { title: 'abc3' },
-  { title: 'abc4' }
+  { title: 'abc4' },
 ])
 let current:number
 const dragStart = (e, index) => {
   e.dataTransfer.setData('text/plain', 'i love you')
-  console.log('dragStart', e)
   current = index
 }
 

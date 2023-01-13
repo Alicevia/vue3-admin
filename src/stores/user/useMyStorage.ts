@@ -18,6 +18,6 @@ export function useMyStorage () {
   return {
     clear,
     getToken,
-    setToken
+    setToken,
   }
 }

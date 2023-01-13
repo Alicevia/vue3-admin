@@ -14,7 +14,6 @@ export const useUserStore = defineStore('user', () => {
     const res = userService.login(model)
     const execute = async () => {
       await res.execute()
-
       if (res.error.value) {
         clearStore()
         return
@@ -74,6 +73,6 @@ export const useUserStore = defineStore('user', () => {
     useLogin,
     userInfo,
     menuList,
-    isLogin
+    isLogin,
   }
 })

@@ -1,2 +1,3 @@
+import { useUserStore } from './user'
 
-export * from './user'
+export const userStore = resolveRef(useUserStore)

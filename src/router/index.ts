@@ -1,22 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { publicRoutes } from './routes'
-import { useUserStore } from '@/stores'
+import { userStore } from '@/stores'
 export * from './routes'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(publicRoutes)
+  routes: setupLayouts(publicRoutes),
 })
 
 router.beforeEach(async (to, from, next) => {
-  const userStore = useUserStore()
 
   $loadingBar?.start()
-  const token = userStore.getToken()
+  const token = userStore.value.getToken()
   if (token) {
-    if (!userStore.isLogin) {
+    if (!userStore.value.isLogin) {
       try {
-        await userStore.validateToken()
+        await userStore.value.validateToken()
         return next(to)
       } catch (error) {
         return next('/login')

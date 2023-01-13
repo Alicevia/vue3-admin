@@ -39,16 +39,16 @@ function generateMenu (routes:RouteRecordRaw[]):MenuOption[] {
         label: item.children.length
           ? item.meta?.label
           : () => h(
-              RouterLink,
-              {
-                to: {
-                  name: item.name
-                }
+            RouterLink,
+            {
+              to: {
+                name: item.name,
               },
-              { default: () => item.meta?.label }
-            ),
+            },
+            { default: () => item.meta?.label },
+          ),
         key: item.name as string,
-        children: generateMenu(item.children)
+        children: generateMenu(item.children),
       }
     })
   } else {

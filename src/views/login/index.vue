@@ -14,16 +14,15 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useUserStore } from '@/stores'
+import { userStore } from '@/stores'
 import type { LoginParams } from '@/api'
-const userStore = useUserStore()
 
 const model:LoginParams = reactive({
   password: undefined,
-  username: undefined
+  username: undefined,
 })
 const router = useRouter()
-const { execute, isLoading, error } = userStore.useLogin(model)
+const { execute, isLoading, error } = userStore.value.useLogin(model)
 const login = async () => {
   await execute()
   if (error.value) return
