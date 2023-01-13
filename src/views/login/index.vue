@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 import type { LoginParams } from '@/api'
 
 const model:LoginParams = reactive({

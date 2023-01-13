@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 
 const router = useRouter()
 const ulRef = ref(null)

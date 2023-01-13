@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { publicRoutes } from './routes'
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 export * from './routes'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios'
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 import router from '@/router'
 export const loginCheckMid = async (
   response: AxiosResponse,

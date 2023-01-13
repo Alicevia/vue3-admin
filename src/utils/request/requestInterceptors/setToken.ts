@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig } from 'axios'
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 export function setToken (config: AxiosRequestConfig): AxiosRequestConfig {
   const token = userStore.value.getToken()
   if (token) {

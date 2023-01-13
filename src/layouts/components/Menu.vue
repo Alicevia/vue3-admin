@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang='ts'>
-import { userStore } from '@/stores'
+import { userStore } from '@/store'
 const route = useRoute()
 const expandedKeys = ref(route.matched.map(item => item.name as string).filter(item => item))
 const value = ref(route.name as string)
