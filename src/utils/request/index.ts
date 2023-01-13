@@ -5,11 +5,10 @@ import { useAxios, type UseAxiosOptions } from '@vueuse/integrations/useAxios'
 const request = axios.create({
   timeout: 10000,
 })
-const a = "23"
 request.interceptors.request.use(requestResolve, (e) => {
-  console.log(e)
   return Promise.reject(e)
 })
+
 request.interceptors.response.use(responseResolve, responseReject)
 
 interface ResponseData<T> {
@@ -17,7 +16,7 @@ interface ResponseData<T> {
   data: T;
   message: string
 }
-function useRequest<T>(url: string, config?: AxiosRequestConfig, options?: UseAxiosOptions) {
+function useRequest<T> (url: string, config?: AxiosRequestConfig, options?: UseAxiosOptions) {
   const result = useAxios<ResponseData<T>>(url, config ?? {}, request, options ?? { immediate: false })
   const data = ref<T>()
   syncRefs(() => result.data.value?.data, data)

@@ -6,8 +6,8 @@
 defineProps({
   title: {
     type: String,
-    default: 'header'
-  }
+    default: 'header',
+  },
 })
 </script>
 <style scoped>

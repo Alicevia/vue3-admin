@@ -1,11 +1,9 @@
 import { defineStore } from 'pinia'
 import { userService, type LoginParams, type UserInfoData } from '@/api'
-import { useMyStorage } from './useMyStorage'
 import { useCreateRouteAndMenu } from './useRouteMenu'
+import { setToken,clearStorage } from '@/utils'
 
 export const useUserStore = defineStore('user', () => {
-  const storage = useMyStorage()
-
   const isLogin = ref(false)
   const userInfo = ref<UserInfoData>({})
   const { menuList, initRoutes, clearRoutes } = useCreateRouteAndMenu(userInfo)
@@ -21,7 +19,7 @@ export const useUserStore = defineStore('user', () => {
       try {
         res.isLoading.value = true
         await getUserBaseInfo()
-        storage.setToken(res.data.value)
+        setToken(res.data.value)
       } catch (error:any) {
         res.error.value = error?.value
       }
@@ -61,11 +59,10 @@ export const useUserStore = defineStore('user', () => {
   const clearStore = () => {
     isLogin.value = false
     userInfo.value = {}
-    storage.clear()
+    clearStorage()
     clearRoutes()
   }
   return {
-    ...storage,
     clearStore,
     getUserBaseInfo,
     validateToken,
