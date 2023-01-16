@@ -13,6 +13,7 @@ export function useCreateRouteAndMenu (userInfo:Ref<UserInfoData>) {
     return generateRoute(_routes, userInfo.value.auth ?? [])
   })
 
+    
   const menuList = computed(() => {
     return generateMenu(privateRoutes.value) ?? []
   })

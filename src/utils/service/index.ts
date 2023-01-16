@@ -1,4 +1,4 @@
-import { request, useRequest } from '@/utils'
+import { request, useRequest,type ResponseData } from '@/utils'
 import type { AxiosRequestConfig, CancelTokenSource, Method } from 'axios'
 import qs from 'qs'
 export class BaseService {
@@ -18,7 +18,7 @@ export class BaseService {
   _createAxiosMethod (method:'get'|'post'|'delete') {
     return <T> (...arg:Parameters<typeof request>) => {
       arg[0] = this.prefix + arg[0]
-      return request[method]<T>(...arg)
+      return request[method]<ResponseData<T>>(...arg)
     }
   }
 
@@ -26,11 +26,10 @@ export class BaseService {
   post = this.createAxiosMethod('post')
   delete = this.createAxiosMethod('delete')
   patch = this.createAxiosMethod('patch')
-  useRequest = useRequest
-  request = request
-  _get = request.get
-  _post = request.post
-  _delete = request.delete
+  
+  _get = this._createAxiosMethod('get')
+  _post = this._createAxiosMethod('post')
+  _delete = this._createAxiosMethod('delete')
 }
 class RequestCache {
   private cache = new Map()

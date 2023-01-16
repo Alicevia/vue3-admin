@@ -4,7 +4,7 @@ interface IconMapProp{
   [key:string]:Component
 }
 const iconMap:IconMapProp = {
-  BookOutline, CashOutline, GameControllerOutline
+  BookOutline, CashOutline, GameControllerOutline,
 }
 
 export { iconMap }

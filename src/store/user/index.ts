@@ -1,60 +1,46 @@
 import { defineStore } from 'pinia'
-import { userService, type LoginParams, type UserInfoData } from '@/api'
+import { userService, type LoginParams } from '@/api'
 import { useCreateRouteAndMenu } from './useRouteMenu'
-import { setToken,clearStorage } from '@/utils'
-
+import { clearStorage } from '@/utils'
+import { useSign } from './useSign'
 export const useUserStore = defineStore('user', () => {
   const isLogin = ref(false)
-  const userInfo = ref<UserInfoData>({})
+  const isLogging=ref(false)
+  const { userInfo, getUserInfo ,sign, token }=useSign()
   const { menuList, initRoutes, clearRoutes } = useCreateRouteAndMenu(userInfo)
 
-  const useLogin = (model:LoginParams) => {
-    const res = userService.login(model)
-    const execute = async () => {
-      await res.execute()
-      if (res.error.value) {
-        clearStore()
-        return
-      }
-      try {
-        res.isLoading.value = true
-        await getUserBaseInfo()
-        setToken(res.data.value)
-      } catch (error:any) {
-        res.error.value = error?.value
-      }
-      res.isLoading.value = false
+  const login =async (params:LoginParams) => {
+    try {
+      isLogging.value=true
+      await sign(params)
+      await getUserInfo()
+      isLogin.value=true
+    } finally{
+      isLogging.value=false
     }
-    return { ...res, execute }
+  }
+  const logout = async () => {
+    try {
+      await userService.logout()
+    } catch (error) {
+      console.error(error)      
+    }finally{
+      clearStore()
+    }
   }
 
-  const logout = async () => {
-    const { execute, error } = userService.logout()
-    await execute()
-    clearStore()
-    if (error.value) return Promise.reject(error)
-  }
   const validateToken = async () => {
-    const { error, execute } = userService.validateToken()
-    await execute()
-    if (error.value) {
+    try {
+      await userService.validateToken()
+      await getUserInfo() 
+      isLogin.value = true
+      initRoutes()
+    } catch (error) {
       clearStore()
       return Promise.reject(error)
-    }
-    return await getUserBaseInfo()
+    } 
   }
-  const getUserBaseInfo = async () => {
-    const { data, error, execute } = userService.getUserInfo()
-    await execute()
-    if (error.value) {
-      clearStore()
-      $message.error('获取用户信息失败,请重新登陆')
-      return Promise.reject(error)
-    }
-    isLogin.value = true
-    userInfo.value = data.value
-    initRoutes()
-  }
+ 
 
   const clearStore = () => {
     isLogin.value = false
@@ -64,10 +50,10 @@ export const useUserStore = defineStore('user', () => {
   }
   return {
     clearStore,
-    getUserBaseInfo,
     validateToken,
+    token,
+    login,
     logout,
-    useLogin,
     userInfo,
     menuList,
     isLogin,
