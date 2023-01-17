@@ -1,5 +1,5 @@
-import { userService ,type LoginParams , type UserInfoData } from '@/api'
-import { setToken ,getToken } from '@/utils'
+import { userService, type LoginParams, type UserInfoData } from '@/api'
+import { setToken, getToken } from '@/utils'
 
 export const useSign = () => {
   const token = resolveRef(getToken)
@@ -14,7 +14,5 @@ export const useSign = () => {
     userInfo.value = data.data
   }
  
-  return { sign, userInfo, getUserInfo,token }
+  return { sign, userInfo, getUserInfo, token }
 }
-
-

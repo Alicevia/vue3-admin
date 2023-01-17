@@ -6,7 +6,7 @@ import { useSign } from './useSign'
 export const useUserStore = defineStore('user', () => {
   const isLogin = ref(false)
   const isLogging=ref(false)
-  const { userInfo, getUserInfo ,sign, token }=useSign()
+  const { userInfo, getUserInfo, sign, token }=useSign()
   const { menuList, initRoutes, clearRoutes } = useCreateRouteAndMenu(userInfo)
 
   const login =async (params:LoginParams) => {
@@ -59,6 +59,5 @@ export const useUserStore = defineStore('user', () => {
     menuList,
     isLogin,
     isLogging,
-
   }
 })

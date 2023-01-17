@@ -1,14 +1,19 @@
 <template>
-  case-header
-  <router-view></router-view>
-  case-footer
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <script setup lang='ts'>
 
 </script>
+
 <style scoped>
+
 </style>
+
 <route lang="yaml">
   meta:
     label: 案例
