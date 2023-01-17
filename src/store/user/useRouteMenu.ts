@@ -19,7 +19,10 @@ export function useCreateRouteAndMenu (userInfo:Ref<UserInfoData>) {
   })
   const clearRoutesCbStack = ref([])
   const initRoutes = () => {
-    setupLayouts(privateRoutes.value).forEach((route: RouteRecordRaw) => {
+  //  setupLayouts将会为每个最外层路由添加layout
+    const  route=setupLayouts(privateRoutes.value)
+    console.log(router)
+    route.forEach((route: RouteRecordRaw) => {
       clearRoutesCbStack.value.push(router.addRoute(route))
     })
   }

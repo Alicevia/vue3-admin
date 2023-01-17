@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@alicevia/eslint-config-vue': ^1.0.17
+  '@alicevia/eslint-config-vue': ^1.0.19
   '@iconify-json/line-md': ^1.1.22
   '@types/koa-compose': ^3.2.5
   '@types/lodash-es': ^4.17.6
@@ -56,7 +56,7 @@ dependencies:
   vue-router: 4.1.6_vue@3.2.45
 
 devDependencies:
-  '@alicevia/eslint-config-vue': 1.0.17_iukboom6ndih5an6iafl45j2fe
+  '@alicevia/eslint-config-vue': 1.0.19_iukboom6ndih5an6iafl45j2fe
   '@iconify-json/line-md': 1.1.22
   '@types/koa-compose': 3.2.5
   '@types/lodash-es': 4.17.6
@@ -82,8 +82,8 @@ devDependencies:
 
 packages:
 
-  /@alicevia/eslint-config-vue/1.0.17_iukboom6ndih5an6iafl45j2fe:
-    resolution: {integrity: sha512-VpPeUcKYejr3tgTOlf01l9B53V/32VHscVshcRFPymjrezIi3YV7aqq32rlNRmVIrlsugH4SNc85f05IXOBjgA==}
+  /@alicevia/eslint-config-vue/1.0.19_iukboom6ndih5an6iafl45j2fe:
+    resolution: {integrity: sha512-eJaSg9iiiJaHiIB6iyAolmaEgxFRL2LpDflqKdM7FNR3w9AYDNQYHzijhkSiPPcsUgSrA8gyaeycpoGep/SFtg==}
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
       '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe

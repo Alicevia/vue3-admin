@@ -14,6 +14,7 @@ export const useSign = () => {
     userInfo.value = data.data
   }
  
-  
-  return { sign, userInfo,getUserInfo,token }
+  return { sign, userInfo, getUserInfo,token }
 }
+
+
