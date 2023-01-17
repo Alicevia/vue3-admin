@@ -6,7 +6,7 @@
     <n-form-item path="password" label="密码">
       <n-input v-model:value="model.password" type="password"></n-input>
     </n-form-item>
-    <n-button :loading="isLoading" round type="primary" @click="login">
+    <n-button :loading="userStore.isLogging" round type="primary" @click="login">
       登录
     </n-button>
   </n-form>
@@ -22,11 +22,9 @@ const model:LoginParams = reactive({
   username: undefined,
 })
 const router = useRouter()
-const { execute, isLoading, error } = userStore.value.useLogin(model)
 const login = async () => {
-  await execute()
-  if (error.value) return
-  router.push('/')
+  await userStore.value.login(model)
+  router.replace('/')
 }
 </script>
 

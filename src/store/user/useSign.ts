@@ -4,7 +4,6 @@ import { setToken ,getToken } from '@/utils'
 export const useSign = () => {
   const token = resolveRef(getToken)
   const userInfo = ref<UserInfoData>({})
-
  
   const sign = async (params:LoginParams) => {
     const { data }=await userService.login(params)

@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
       isLogging.value=true
       await sign(params)
       await getUserInfo()
+      initRoutes()
       isLogin.value=true
     } finally{
       isLogging.value=false
@@ -57,5 +58,7 @@ export const useUserStore = defineStore('user', () => {
     userInfo,
     menuList,
     isLogin,
+    isLogging,
+
   }
 })
