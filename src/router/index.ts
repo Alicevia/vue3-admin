@@ -38,6 +38,6 @@ const docTitle = useTitle()
 
 router.afterEach((to) => {
   $loadingBar?.finish()
-  docTitle.value = to.matched.map(item => item.meta.label).filter(item => item).join('-')
+  docTitle.value = Array.from(new Set(to.matched.map(item => item.meta.label))).filter(item => item).join('-')
 })
 export default router
